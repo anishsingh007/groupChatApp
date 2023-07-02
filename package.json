@@ -1,0 +1,27 @@
+{
+  "name": "groupchatapp",
+  "version": "1.0.0",
+  "description": "It will allow user to interact amongst them through messages and also create groups",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "Anish Singh",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anishsingh007/groupChatApp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/anishsingh007/groupChatApp/issues"
+  },
+  "homepage": "https://github.com/anishsingh007/groupChatApp#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22",
+    "sequelize": "^6.32.1"
+  }
+}
