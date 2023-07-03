@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const router = express.Router();
 
+const userController = require('../controller/user')
 
 router.get('/',(req,res)=>{
     res.redirect('/signup')
@@ -12,19 +13,14 @@ router.get('/signup',(req,res)=>{
 
 })
 
-router.post('/user-signup', (req, res) => {
-    // Retrieve the user signup data from the request body
-    const { name, email, phone, password} = req.body;
-  
+router.post('/user-signup', userController.signup);
 
-    // Perform any necessary validation or processing
-  
-    // Example: Save the user data to a database
-    // ...
-  
-    // Send a response back to the client
-    res.status(200).json({ message: 'User signup successful' });
-  });
+router.get('/login',(req,res)=>{
+    res.sendFile(path.join(__dirname,'../public/login.html'))
+
+})
+
+router.post('/user-login',userController.login);
 
 
 

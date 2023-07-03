@@ -2,6 +2,10 @@ const express = require('express');
 const path = require ('path')
 const bodyParser = require('body-parser')
 var cors = require('cors')
+const sequelize = require('./util/database')
+
+//models
+//const User = require('./models/users')
 
 const app = express();
 
@@ -16,4 +20,10 @@ const userRoutes = require('./routes/user')
 
 app.use(userRoutes)
 
-app.listen(3000);
+sequelize.sync().then(() => {
+    app.listen(3000);
+    console.log('success');
+})
+.catch(err => {
+    console.log(err);
+})
