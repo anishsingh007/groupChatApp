@@ -15,7 +15,7 @@ async function login(e) {
     //       localStorage.setItem('token', token);
     //       console.log(token);
           alert(response.data.message);
-        //   window.location.href='/dashboard.html'
+           window.location.href='/chat.html'
         }
       })
       .catch((err) => {
