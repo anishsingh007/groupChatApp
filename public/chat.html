@@ -6,11 +6,25 @@
     <title>Xchat</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src = 'chat.js'></script>
+    <style>
+        body{
+            height: 100vh;
+            position: relative;
+        }
+        form{
+            position: absolute;
+            bottom: 50px;
+            left: 50px;
+        }
+    </style>
 </head>
+
 <h1>Welcome to Dashboard</h1>
 <body>
+   <form onsubmit="send(event)">
     <label for="chat">Enter Your Message</label>
-    <input type="text" id ='chat' name="chat" >
+    <input type="text" id ='chat' name="chat" placeholder="Type Here!!" />
     <button>Send Now!</button>
+</form>
 </body>
 </html>
