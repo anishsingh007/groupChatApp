@@ -1,28 +1,59 @@
-const message = require('../models/chatmsg')
+const express = require("express");
+const User = require("../src/models/signup");
+const Message = require("../src/models/message");
+const { Op } = require("sequelize");
 
-const addmsg = async (req,res)=>{
-    try {
-        const { chat } = req.body;
-        console.log(chat);
-       
-        const userId = req.user.id;// i am getting this through authemntication middleware where i am saving
-        //the decoded user object in req.user
-    console.log(userId);
-    
-        // saving to table called message)
-            await message.create({message:chat,userId:userId})
+exports.getUsers = async (req, res, next) => {
+  User.findAll({
+    where: {
+      id: {
+        [Op.ne]: req.id,
+      },
+    },
+  }).then((users) => {
+    res.status(200).json({
+      success: true,
+      users: users,
+      message: "users send successfully",
+    });
+  });
+};
 
+exports.getChat = async (req, res, next) => {
+  const lastMsg = +req.query.lastMsg;
 
-        // Send a response back to the client
-        res.status(200).json({ message: 'Chat message received successfully' });
-      } catch (error) {
-        // Handle any errors that occur during the processing
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
-      }
-    };
+  await Message.findAll({ where: { id: { [Op.gt]: lastMsg } } })
+    .then((messages) => {
+      res.status(200).json({
+        success: true,
+        chat: messages,
+        message: "chat send successfully",
+      });
+    })
+    .catch((err) => {
+      res
+        .status(403)
+        .json({ success: true, error: err, message: "something went wrong" });
+    });
+};
 
+exports.postChat = async (req, res, next) => {
+  const id = req.id;
+  const msg = req.body.message;
 
+  const user = await User.findOne({ where: { id: id } })
+    .then((user) => {
+      return user.name;
+    })
+    .catch(() => {
+      console.log("in post chat error");
+    });
 
-
-module.exports={addmsg,}
+  await Message.create({ username: user, message: msg, userId: id }).then(
+    (result) => {
+      return res
+        .status(201)
+        .json({ result: result, success: true, message: "added message" });
+    }
+  );
+};

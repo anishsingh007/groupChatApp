@@ -2,29 +2,87 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xchat</title>
+    <link rel="stylesheet" href="./chat.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src = 'chat.js'></script>
-    <style>
-        body{
-            height: 100vh;
-            position: relative;
-        }
-        form{
-            position: absolute;
-            bottom: 50px;
-            left: 50px;
-        }
-    </style>
+    <script src="./chat.js" defer></script>
+    <script src="./group.js" defer></script>
+    <!-- <script src="./js/groupAdmin.js" defer></script> -->
+    <title>Chat-App</title>
 </head>
-
-<h1>Welcome to Dashboard</h1>
 <body>
-   <form onsubmit="send(event)">
-    <label for="chat">Enter Your Message</label>
-    <input type="text" id ='chat' name="chat" placeholder="Type Here!!" />
-    <button>Send Now!</button>
-</form>
+    <h1>Welcome To The X-Chat App</h1>
+    <h2>Future Of Secured Messaging</h2>
+    <!--CREATEGROUP -->
+ <!-- Trigger/Open The Modal -->
+ <button id="creategroup">CREATE GROUP</button>
+
+ <!-- The Modal -->
+ <div id="CreateGroup" class="modal">
+ 
+   <!-- Modal content -->
+   <div class="modal-content">
+    <input type="text" id="grpName" placeholder="Group Name">
+    <input type="text" id="grpDesc" placeholder="Description">
+    <button id="creategroupbutton">Create Group</button>
+     <span class="close">&times;</span>
+   </div>
+ 
+ </div> 
+<!-- Now COmes the ALL connected Groups Button  -->
+ <button id="joinedGroup">JOINED GROUPS</button>
+
+ <!-- The Modal -->
+ <div id="JoinedGroup" class="modal1">
+ 
+   <!-- Modal content -->
+   <div class="modal-content1">
+    <span class="close1">&times;</span>
+    <ul id="groupList"></ul>
+   </div>
+ 
+ </div> 
+
+<div id="mesg">
+    <input type="text" id="message" placeholder="Enter Message">
+    <button id="sendmessage">Send</button>
+</div>
 </body>
-</html>
+</html> 
+    <!-- <main>
+    
+        <section class="chat">
+            <h1>People</h1>
+            <div id="people" class="people">
+                  <p>man1</p>
+            </div>
+            
+            <h1 class="head"> Groups</h1>
+            <button class="create-grp" id="openCreateGrp">+</button>
+
+            <div id="groups" class="groups">
+                <button onclick="callGrp(event)" class="diffGrps" id="some"> Group1</button>
+            </div>
+        </section>
+
+
+        <section class="messages">
+            <div class="display-msg">
+                <h2 class="msg-head">Chat-App</h2>
+                <div class="chat-section">
+                    <table id="messages-table">
+                            
+                    </table>
+                </div>
+            </div>
+            <div class="submit-btn">
+                <form onsubmit="saveMessage(event)">
+                    <input type="text" name="message" placeholder="message">
+                    <button type="submit">send</button>
+                </form>
+            </div>
+        </section>
+     
+    </main>-->
+

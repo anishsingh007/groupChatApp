@@ -3,32 +3,35 @@ const path = require ('path')
 const bodyParser = require('body-parser')
 var cors = require('cors')
 const sequelize = require('./util/database')
-const { authenticate } = require('./middleware/auth');
+
 
 //models
 const User = require('./models/user')
-const chatmsg = require('./models/chatmsg')
+const Group =require('./models/group')
+const GroupMembers=require('./models/groupMembers')
 
 const app = express();
 
 
 app.use(bodyParser.json());//used for parsing data from body
 app.use(express.static(path.join(__dirname,'public')));
-app.use(cors())
+app.use(cors());
 
 
 
 const userRoutes = require('./routes/user')
-const chatRoutes = require('./routes/chat')
+const groupRoutes= require('./routes/groups')
+
 
 app.use(userRoutes)
- app.use(authenticate)
-app.use(chatRoutes)
+app.use(groupRoutes)
 
 
 
-chatmsg.belongsTo(User);
-User.hasMany(chatmsg);
+
+Group.belongsToMany(User, { through: "GroupMembers" });
+User.belongsToMany(Group, { through: "GroupMembers" });
+
 
 sequelize.sync({alter:true}).then(() => {
     app.listen(3000);
@@ -37,3 +40,4 @@ sequelize.sync({alter:true}).then(() => {
 .catch(err => {
     console.log(err);
 })
+//{force:true}
